@@ -1,1 +1,9 @@
-
+p {
+    font-weight: bold;
+}
+li {
+    font-weight: bolder;
+}
+div li {
+    font-size: x-large;
+}
