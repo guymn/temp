@@ -67,7 +67,7 @@ btnRoll.addEventListener('click', function () {
         switchPlayer()
     }
     else{
-        currentScore = index+1
+        currentScore += index+1
         document.getElementById(`current--${activePlayer}`).textContent = currentScore;
 
     }
