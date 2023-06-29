@@ -28,8 +28,8 @@ const poll = {
   
   registerNewAnswer() {
     let prom = this.question;
-    poll.options.forEach((value) => {
-      prom += value + '\n'
+    poll.options.forEach((value, key) => {
+      prom += `${key} : ${value}\n`
     }); 
     const input = prompt(prom)
     const selectedOption = Number(input);
