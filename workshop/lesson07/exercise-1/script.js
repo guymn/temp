@@ -20,40 +20,49 @@
 
 // 5. Bonus: Use the 'displayResults' method to display the 2 arrays in the test data. Use both the 'array' and the 'string' option. Do not put the arrays in the poll object! So what should the this keyword look like in this situation?
 
-const pollBtn = document.querySelector('.poll');
 
 const poll = {
-  question: 'What is your favourite programming language',
-  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
-  // This generates [0, 0, 0, 0]. More in the next section!
-  answers: new Array(4).fill(0),
+  question: 'What is your favorite programming language?\n',
+  options: ['JavaScript', 'Python', 'Rust', 'C++'],
+  answers: [0, 0, 0, 0],
+  
   registerNewAnswer() {
-    let prom = 'What is your favourite programming language?\n'
-      poll.options.forEach((value) => {
-        prom += value + '\n'
-      }); 
+    let prom = this.question;
+    poll.options.forEach((value) => {
+      prom += value + '\n'
+    }); 
     const input = prompt(prom)
-    let select = Number(input)
-    if(select >= 0 && select <= 3){
-      poll.answers[select]++
-      this.displayResults(input);
-    }
-    else{
+    const selectedOption = Number(input);
+
+    if (selectedOption >= 0 && selectedOption < this.options.length && Number.isInteger(selectedOption)) {
+      this.answers[selectedOption]++;
+    } else {
+      alert('Invalid option. Please try again.');
       this.registerNewAnswer();
     }
-  },
-  displayResults(type) {
-    if (typeof(type).Array) {
-      console.log(this.answers);
 
+    this.displayResults();
+  },
+
+  displayResults(type = 'array') {
+    if (type === 'string') {
+      console.log(`Poll results are ${this.answers.join(', ')}`);
     } else {
-      const resultsString = `Poll results are ${this.answers.join(', ')}`;
-      console.log(resultsString);
+      console.log(...this.answers);
     }
   }
 };
 
-
+const pollBtn = document.querySelector('.poll');
 pollBtn.addEventListener('click', function(){
   poll.registerNewAnswer();
 });
+
+// Test data for bonus
+const data1 = [5, 2, 3];
+const data2 = [1, 5, 3, 9, 6, 1];
+
+poll.displayResults.call({ answers: data1 }, 'array');
+poll.displayResults.call({ answers: data1 }, 'string');
+poll.displayResults.call({ answers: data2 }, 'array');
+poll.displayResults.call({ answers: data2 }, 'string');
