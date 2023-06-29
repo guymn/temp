@@ -36,19 +36,20 @@ const poll = {
 
     if (selectedOption >= 0 && selectedOption < this.options.length && Number.isInteger(selectedOption)) {
       this.answers[selectedOption]++;
+      this.displayResults(input);
     } else {
       alert('Invalid option. Please try again.');
       this.registerNewAnswer();
     }
 
-    this.displayResults();
   },
 
-  displayResults(type = 'array') {
-    if (type === 'string') {
+  displayResults(type) {
+    if (typeof type === 'string') {
       console.log(`Poll results are ${this.answers.join(', ')}`);
     } else {
       console.log(...this.answers);
+
     }
   }
 };
@@ -62,7 +63,6 @@ pollBtn.addEventListener('click', function(){
 const data1 = [5, 2, 3];
 const data2 = [1, 5, 3, 9, 6, 1];
 
-poll.displayResults.call({ answers: data1 }, 'array');
-poll.displayResults.call({ answers: data1 }, 'string');
-poll.displayResults.call({ answers: data2 }, 'array');
-poll.displayResults.call({ answers: data2 }, 'string');
+poll.displayResults(data1);
+poll.displayResults(data2);
+
