@@ -42,7 +42,7 @@ createImage(`http://127.0.0.1:5500/workshop/lesson09/exercise-2/img/img-1.jpg`)
     const currentImg = imgElm.querySelector('img');
     currentImg.style.display = 'none';
     return createImage(
-      `http://127.0.0.1:5500/workshop/lesson09/exercise-2/img/img-9.jpg`
+      `http://127.0.0.1:5500/workshop/lesson09/exercise-2/img/img-2.jpg`
     );
   })
   .then(function (img) {
