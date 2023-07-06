@@ -1,0 +1,14 @@
+{
+  "name": "camt-tours",
+  "version": "1.0.0",
+  "description": "1. Open the terminal and change the current directory to `./lesson11/exercise-1`\r 2. Init the node package by typing:",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
