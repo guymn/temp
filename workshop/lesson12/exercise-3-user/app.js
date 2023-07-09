@@ -1,12 +1,12 @@
 'use strict';
 
 const express = require('express');
-const tourRoute = require('./user/userRoutes');
+const userRoute = require('./user/userRoutes');
 const { escape } = require('querystring');
 
 const app = express();
 app.use(express.json());
-app.use('/api/v1/tours', tourRoute);
+app.use('/api/v1/user', userRoute);
 app.use(express.static(`${__dirname}/public`));
 
 module.exports = app;
