@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const tourRoute = require('./tour/tourRoutes');
+const tourRoute = require('./user/userRoutes');
 const { escape } = require('querystring');
 
 const app = express();

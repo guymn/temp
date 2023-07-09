@@ -1,6 +1,6 @@
 'use strict';
 const express = require('express');
-const tourController = require('./tourController');
+const tourController = require('./userController');
 
 const tourRoute = express.Router();
 
