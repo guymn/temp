@@ -1,0 +1,110 @@
+body {
+  font-family: 'FF Mark W05', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+
+.head-label{
+  padding: 10px;
+}
+
+a {
+  padding: 5px;
+  font-size: 10px;
+  text-decoration: unset;
+  color: #888888;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #007bff; /* Apply new text color on hover */
+}
+
+a:active {
+  color: #ff4500; /* Apply new text color when link is active/clicked */
+}
+
+button {
+  background-color: #aad260;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  max-width: 160px;
+}
+
+button:hover {
+  background-color: #9cc24f; 
+}
+
+button:active {
+  background-color: #7fa33c; 
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-group input {
+  padding: 10px;
+  background-color: rgb(227, 238, 238);
+  border-radius: 3px;
+  font-size: 14px;
+  border: none;
+}
+
+.form-group input:hover {
+  background-color: #e7e7e7;
+}
+
+.form-group label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 14px;
+  color: #888;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-group input.active {
+  padding-top: 15px;
+  padding-bottom: 5px;
+  background-color: #fff;
+}
+
+.form-group label.active {
+  top: 3px;
+  font-size: 7px;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.back{
+  width: 30px;
+  height: 15px;
+  background-color: #cb5151;
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  background-image: url(/workshop/lesson12/exercise-2/img/arrow-symbol.png);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.back:hover {
+  background-color: #dc3333;
+}
+
+.back:active {
+  background-color: #e01212;
+}

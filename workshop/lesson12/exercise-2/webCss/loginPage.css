@@ -1,0 +1,13 @@
+
+.login-container {
+  position: relative;
+  background: #f9f9f9;
+  padding: 5.985335926978902rem 5.985335926978902rem 5.985335926978902rem;
+  color: #111;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  display: flex;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
