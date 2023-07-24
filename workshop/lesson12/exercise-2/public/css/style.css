@@ -36,8 +36,9 @@ button {
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
-  cursor: pointer;
-  max-width: 160px;
+  width: 80px;
+  margin-left: 55px;
+  margin-right: 55px;
 }
 
 button:hover {
@@ -93,7 +94,7 @@ button:active {
   position: absolute;
   left: 10px;
   bottom: 10px;
-  background-image: url(/workshop/lesson12/exercise-2/img/arrow-symbol.png);
+  background-image: url(../img/arrow-symbol.png);
   background-size: 50%;
   background-repeat: no-repeat;
   background-position: center center;
