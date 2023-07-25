@@ -1,0 +1,32 @@
+body{
+    display: flex;
+    flex-direction: column;
+    background-color: #b6cddf;
+    margin: 0;
+    padding: 0;
+}
+
+.head-tour {
+    background-image: url('../img/tours-head2.jpg');
+    background-position: center; 
+    background-size: cover;
+    height: 400px;   
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tour-card {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.tour-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.tour-description {
+  margin-top: 10px;
+}

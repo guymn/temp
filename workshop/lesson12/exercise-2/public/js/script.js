@@ -1,4 +1,5 @@
 const userDatabase = 'http://127.0.0.1:3000/api/v1/users/';
+const tourDatabase = 'http://127.0.0.1:3000/api/v1/tours/';
 const homeURL = 'http://127.0.0.1:3000/page/home.html';
 const indexURL = 'http://127.0.0.1:3000/';
 
@@ -65,6 +66,7 @@ async function checkSeal(bool, doTrue, doFlase) {
 }
 export {
   userDatabase,
+  tourDatabase,
   homeURL,
   indexURL,
   oops,
