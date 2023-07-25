@@ -34,48 +34,34 @@ document.addEventListener('DOMContentLoaded', function () {
       const lastName = document.getElementById('lastName').value;
       const password = document.getElementById('password').value;
       const passwordConfirm = document.getElementById('confirm_password').value;
-      if (checkData(userName, firstName, lastName, password, passwordConfirm)) {
-        // postData(userName, firstName, lastName, password)
-        //   .then(data => {
-        //     console.log('Data successfully posted:', data);
-        //   })
-        //   .catch(error => {
-        //     console.error('Error posting data:', error);
-        //   });
-        myModule.success('Success', 1.5);
-        await myModule.wait(1.8);
+
+      if (password == passwordConfirm) {
+        postData(userName, firstName, lastName, password)
+          .then(async data => {
+            myModule.success(`Successfully register`, 1.5);
+            await myModule.wait(1.8);
+            console.log('Success');
+            myModule.navigateToAnotherPage(myModule.indexURL)
+          })
+          .catch(error => {
+            console.log(error);
+            reject(error);
+          });
+      }
+      else {
+        myModule.oops('Error..', `The password and confirmation password do not match.`, '');
       }
     });
 });
-
-async function checkData(userName, fName, lName, pass, passC) {
-  let user = await myModule.useFetchUsers();
-  let bool = false;
-  await user.forEach(element => {
-    if (userName == element.userName) {
-      bool = true
-      return 
-    }
-  });
-  if(bool){
-    myModule.oops('Wrong..', 'Duplicate username!', '');
-    return false
-  }
-  if(pass != passC){
-    myModule.oops('Wrong..', 'The password and confirmation password do not match!', '');
-    return false
-  }
-  return true;
-}
 
 function postData(userName, fName, lName, pass) {
   return new Promise((resolve, reject) => {
     // Prepare the data to be sent in the request body
     const data = {
-      userName: userName,
-      firstName: fName,
-      lastName: lName,
+      FristName: fName,
+      LastName: lName,
       password: pass,
+      userName: userName,
     };
 
     // Make the POST request using Fetch API
@@ -90,10 +76,13 @@ function postData(userName, fName, lName, pass) {
         if (response.ok) {
           resolve(response.json());
         } else {
-          reject(`Request failed with status: ${response.status}`);
+          response.json().then(data => {
+            myModule.oops('Error..', `${data.error}`, '');
+          });
         }
       })
       .catch(error => {
+        console.log(error);
         reject(error);
       });
   });

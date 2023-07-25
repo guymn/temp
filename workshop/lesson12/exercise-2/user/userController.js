@@ -37,16 +37,43 @@ exports.getUser = async (req, res) => {
 
 exports.createUser = async (req, res) => {
   try {
-    const user = await User.create(req.body);
+    const { userName, FristName, LastName, password } = req.body;
 
-    res.status(200).json({
+    // Check if the userName is provided
+    if (!userName) {
+      return res.status(400).json({ error: 'A user must have a user name' });
+    }
+
+    // Check if the password is provided, has more than 8 characters, and contains no spaces
+    if (!password || password.length < 8) {
+      return res.status(400).json({
+        error: 'The password must have 8 or more characters.',
+      });
+    }
+    if (/\s/.test(password)) {
+      return res.status(400).json({
+        error: 'The password must not have spaces.',
+      });
+    }
+
+    // Check if a user with the same userName already exists
+    const existingUser = await User.findOne({ userName });
+    if (existingUser) {
+      return res.status(400).json({ error: 'This username is duplicate.' });
+    }
+
+    // Create a new user
+    const newUser = new User({ userName, FristName, LastName, password });
+    await newUser.save();
+
+    res.status(201).json({
       status: 'Success',
-      message: user,
+      message: newUser,
     });
-  } catch (err) {
-    res.status(400).json({
+  } catch (error) {
+    res.status(500).json({
       status: 'Failed',
-      message: err,
+      message: error.message,
     });
   }
 };

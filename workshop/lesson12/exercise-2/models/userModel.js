@@ -5,12 +5,12 @@ const mongoose = require('mongoose');
 const usersSchema = mongoose.Schema({
   userName: {
     type: String,
-    required: [true, 'A user must user name'],
-    unique: true,
+    required: [true, 'A user must have user name'],
+    unique: [true, 'This username is duplicate'],
   },
-  FristName: { type: String, required: [true, 'A user must first name'] },
-  LastName: { type: String, required: [true, 'A user must last name'] },
-  password: { type: String, required: [true, 'A user must password'] },
+  FristName: { type: String, required: [true, 'A user must have first name'] },
+  LastName: { type: String, required: [true, 'A user must have last name'] },
+  password: { type: String, required: [true, 'A user must have password'] },
 });
 // "userName": "guy",
 // "FristName": "nattawut",
