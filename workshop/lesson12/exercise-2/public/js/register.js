@@ -1,45 +1,71 @@
-const backElementId = 'back';
-const pageURL = 'http://127.0.0.1:3000/';
+import * as myModule from './script.js';
+const backElement = document.getElementById('back');
 
-navigateToAnotherPage(backElementId, pageURL);
-
-function navigateToAnotherPage(id, page) {
-  const element = document.getElementById(id);
+const navigateToAnotherPage = async function (page) {
   return new Promise((resolve, reject) => {
-    element.addEventListener('click', async function () {
-      try {
-        window.location.href = page;
-        resolve();
-      } catch (error) {
-        reject(error);
-      }
-    });
+    try {
+      window.location.href = page;
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
   });
-}
+};
+
+backElement.addEventListener('click', async function () {
+  console.log('h');
+  myModule
+    .navigateToAnotherPage(myModule.indexURL)
+    .then(() => {
+      console.log('Page navigation successful');
+    })
+    .catch(error => {
+      console.error('Error while navigating:', error);
+    });
+});
 
 document.addEventListener('DOMContentLoaded', function () {
   document
     .getElementById('registerForm')
-    .addEventListener('submit', function (event) {
+    .addEventListener('submit', async function (event) {
       event.preventDefault();
       const userName = document.getElementById('userName').value;
       const firstName = document.getElementById('firstName').value;
       const lastName = document.getElementById('lastName').value;
       const password = document.getElementById('password').value;
       const passwordConfirm = document.getElementById('confirm_password').value;
-      checkData(userName, firstName, lastName, password, passwordConfirm)
-      postData(userName, firstName, lastName, password)
-        .then(data => {
-          console.log('Data successfully posted:', data);
-        })
-        .catch(error => {
-          console.error('Error posting data:', error);
-        });
+      if (checkData(userName, firstName, lastName, password, passwordConfirm)) {
+        // postData(userName, firstName, lastName, password)
+        //   .then(data => {
+        //     console.log('Data successfully posted:', data);
+        //   })
+        //   .catch(error => {
+        //     console.error('Error posting data:', error);
+        //   });
+        myModule.success('Success', 1.5);
+        await myModule.wait(1.8);
+      }
     });
 });
 
-function checkData(userName, fName, lName, pass, passC){
-
+async function checkData(userName, fName, lName, pass, passC) {
+  let user = await myModule.useFetchUsers();
+  let bool = false;
+  await user.forEach(element => {
+    if (userName == element.userName) {
+      bool = true
+      return 
+    }
+  });
+  if(bool){
+    myModule.oops('Wrong..', 'Duplicate username!', '');
+    return false
+  }
+  if(pass != passC){
+    myModule.oops('Wrong..', 'The password and confirmation password do not match!', '');
+    return false
+  }
+  return true;
 }
 
 function postData(userName, fName, lName, pass) {
@@ -53,7 +79,7 @@ function postData(userName, fName, lName, pass) {
     };
 
     // Make the POST request using Fetch API
-    fetch('http://127.0.0.1:3000/api/v1/users/', {
+    fetch(myModule.userDatabase, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
