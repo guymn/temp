@@ -4,6 +4,14 @@ body{
     background-color: #b6cddf;
     margin: 0;
     padding: 0;
+    font-family: 'FF Mark W05', sans-serif;
+}
+
+.tours {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: start;
 }
 
 .head-tour {
@@ -20,6 +28,11 @@ body{
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
+  /* width: fit-content; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 175px;
 }
 
 .tour-title {
@@ -30,3 +43,33 @@ body{
 .tour-description {
   margin-top: 10px;
 }
+
+.fieldElement{
+  display: flex;
+  flex-direction: row;
+}
+
+.headClass{
+  font-weight: bolder;
+}
+
+.labelClass{
+  padding-left: 5px;
+}
+
+.textTour {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.imgTour {
+  width: 20%;
+  height: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid #000;
+  margin-right: 15px;
+}
+

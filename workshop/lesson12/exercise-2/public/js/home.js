@@ -26,6 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
   function createTourCard(tour) {
     const tourCard = document.createElement('div');
     tourCard.classList.add('tour-card');
+    const tourCardText = document.createElement('div');
+    const tourCardImg = document.createElement('div');
+    tourCard.appendChild(tourCardImg);
+    tourCard.appendChild(tourCardText);
+
+    tourCardText.classList.add('textTour');
+    tourCardImg.classList.add('imgTour');
+    tourCardImg.style.backgroundImage = `url(${tour.imageCover})`
+
+    const headElement = [
+      { label: 'Name', value: `${tour.name}` },
+      { label: 'Price', value: `${tour.price} $` },
+    ];
 
     const tourFields = [
       { label: 'Duration', value: `${tour.duration} days` },
@@ -35,43 +48,62 @@ document.addEventListener('DOMContentLoaded', () => {
         label: 'Ratings',
         value: `${tour.ratingsAverage} (${tour.ratingsQuantity} reviews)`,
       },
-      { label: 'Overall Rating', value: tour.rating },
-      { label: 'Summary', value: tour.summary },
-      { label: 'Start Dates', value: tour.startDates.join(', ') },
     ];
 
-    const nameElement = document.createElement('div');
-    nameElement.innerText = `Name: ${tour.name}`;
-    nameElement.style.fontWeight = 'bold';
-    tourCard.appendChild(nameElement);
+    const tourFieldsMore = [
+      { label: 'Start Dates', value: tour.startDates.join(', ') },
+      { label: 'Description', value: `${tour.description.replace(/\n/g, '')}` },
+    ];
 
-    for (const field of tourFields) {
-      let label = field.label;
-      let value = field.value;
-      const fieldElement = document.createElement('div');
-      fieldElement.innerText = `${label}: ${value}`;
-      tourCard.appendChild(fieldElement);
+    const textElement = [headElement, tourFields];
+
+    const fieldClass = ['fieldElement', 'headClass', 'labelClass'];
+    for (let text of textElement) {
+      appendTourFieldsToCard(text, tourCardText, ...fieldClass);
     }
-
-    const descriptionElement = document.createElement('div');
-    descriptionElement.innerText = `Description : ${tour.description.replace(/\n/g, '')}`;
-
-    const readMoreLink = document.createElement('a');
-    readMoreLink.href = '#'; // You can set the actual URL here
-    readMoreLink.innerText = 'Read More';
-    readMoreLink.addEventListener('click', () => {
-      descriptionElement.style.display = 'block'; // Show the full description
-      readMoreLink.style.display = 'none'; // Hide the "Read More" link
-    });
-    let temp = document.createElement('div');
-    temp.appendChild(descriptionElement);
-    temp.appendChild(readMoreLink);
-
-    // Initially hide the full description and show the "Read More" link
-    descriptionElement.style.display = 'none';
-    readMoreLink.style.display = 'inline';
-    tourCard.appendChild(temp);
-
     return tourCard;
   }
 });
+
+function appendTourFieldsToCard(
+  tourFields,
+  tourCardText,
+  fieldClass,
+  labelClass,
+  valueClass
+) {
+  return new Promise((resolve, reject) => {
+    try {
+      for (const field of tourFields) {
+        let label = field.label;
+        let value = field.value;
+        const fieldElement = document.createElement('div');
+        const labelElement = document.createElement('div');
+        const valueElement = document.createElement('div');
+        labelElement.innerText = `${label}:`;
+        valueElement.innerText = `${value}`;
+        labelElement.classList.add(labelClass);
+        valueElement.classList.add(valueClass);
+
+        fieldElement.appendChild(labelElement);
+        fieldElement.appendChild(valueElement);
+        fieldElement.classList.add(fieldClass);
+        tourCardText.appendChild(fieldElement);
+      }
+      resolve(tourCardText);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+function addStlyeBold(fieldElement) {
+  return new Promise((resolve, reject) => {
+    try {
+      fieldElement.style.fontWeight = 'bold';
+      resolve(fieldElement);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
