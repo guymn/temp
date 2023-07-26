@@ -1,17 +1,6 @@
 import * as myModule from './script.js';
 const backElement = document.getElementById('back');
 
-const navigateToAnotherPage = async function (page) {
-  return new Promise((resolve, reject) => {
-    try {
-      window.location.href = page;
-      resolve();
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
-
 backElement.addEventListener('click', async function () {
   console.log('h');
   myModule
@@ -56,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function postData(userName, fName, lName, pass) {
   return new Promise((resolve, reject) => {
-    // Prepare the data to be sent in the request body
     const data = {
       FristName: fName,
       LastName: lName,
@@ -64,7 +52,6 @@ function postData(userName, fName, lName, pass) {
       userName: userName,
     };
 
-    // Make the POST request using Fetch API
     fetch(myModule.userDatabase, {
       method: 'POST',
       headers: {

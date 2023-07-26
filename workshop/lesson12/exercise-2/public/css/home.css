@@ -1,10 +1,13 @@
-body{
-    display: flex;
-    flex-direction: column;
-    background-color: #b6cddf;
-    margin: 0;
-    padding: 0;
-    font-family: 'FF Mark W05', sans-serif;
+body {
+  font-family: 'FF Mark W05', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: unset;
+  align-items: unset;
+  height: unset;
+  background-color: #b6cddf;
 }
 
 .tours {
@@ -73,3 +76,20 @@ body{
   margin-right: 15px;
 }
 
+.swal-custom-size{
+  width: 1000px !important; /* Set the desired width */
+  height: 600px !important; /* Set the desired height */
+}
+
+.swal2-title {
+  position: relative;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 1em 0;
+  color: inherit;
+  font-size: 1.875em;
+  font-weight: 600;
+  text-align: center;
+  text-transform: none;
+  word-wrap: break-word;
+}

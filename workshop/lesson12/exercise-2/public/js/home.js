@@ -1,4 +1,18 @@
 import * as myModule from './script.js';
+const backElement = document.getElementById('back');
+
+backElement.addEventListener('click', async function () {
+  console.log('h');
+  myModule
+    .navigateToAnotherPage(myModule.indexURL)
+    .then(() => {
+      console.log('Page navigation successful');
+    })
+    .catch(error => {
+      console.error('Error while navigating:', error);
+    });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const toursContainer = document.getElementById('tours');
 
@@ -19,6 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function displayTours(toursData) {
     toursData.forEach(tour => {
       const tourCard = createTourCard(tour);
+      tourCard.addEventListener('click', () => {
+        console.log(tour);
+        showDescription(tour);
+      });
       toursContainer.appendChild(tourCard);
     });
   }
@@ -33,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tourCardText.classList.add('textTour');
     tourCardImg.classList.add('imgTour');
-    tourCardImg.style.backgroundImage = `url(${tour.imageCover})`
+    tourCardImg.style.backgroundImage = `url(${tour.imageCover})`;
 
     const headElement = [
       { label: 'Name', value: `${tour.name}` },
@@ -59,51 +77,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fieldClass = ['fieldElement', 'headClass', 'labelClass'];
     for (let text of textElement) {
-      appendTourFieldsToCard(text, tourCardText, ...fieldClass);
+      appendTourFieldsToCard(text, tourCardText, fieldClass);
     }
     return tourCard;
   }
 });
 
-function appendTourFieldsToCard(
-  tourFields,
-  tourCardText,
-  fieldClass,
-  labelClass,
-  valueClass
-) {
-  return new Promise((resolve, reject) => {
-    try {
-      for (const field of tourFields) {
-        let label = field.label;
-        let value = field.value;
-        const fieldElement = document.createElement('div');
-        const labelElement = document.createElement('div');
-        const valueElement = document.createElement('div');
-        labelElement.innerText = `${label}:`;
-        valueElement.innerText = `${value}`;
-        labelElement.classList.add(labelClass);
-        valueElement.classList.add(valueClass);
+async function appendTourFieldsToCard(tourFields, tourCardText, fieldClass) {
+  try {
+    for (const field of tourFields) {
+      let label = field.label;
+      let value = field.value;
 
-        fieldElement.appendChild(labelElement);
-        fieldElement.appendChild(valueElement);
-        fieldElement.classList.add(fieldClass);
-        tourCardText.appendChild(fieldElement);
-      }
-      resolve(tourCardText);
-    } catch (error) {
-      reject(error);
+      const fieldElement = document.createElement('div');
+      fieldElement.classList.add(fieldClass[0]);
+
+      const labelElement = document.createElement('label');
+      labelElement.textContent = `${label}:`;
+      labelElement.classList.add(fieldClass[1]);
+      fieldElement.appendChild(labelElement);
+
+      const valueElement = document.createElement('span');
+      valueElement.textContent = value;
+      valueElement.classList.add(fieldClass[2]);
+      fieldElement.appendChild(valueElement);
+
+      await tourCardText.appendChild(fieldElement);
     }
-  });
+    return Promise.resolve(tourCardText);
+  } catch (error) {
+    return Promise.reject(error);
+  }
 }
 
-function addStlyeBold(fieldElement) {
-  return new Promise((resolve, reject) => {
-    try {
-      fieldElement.style.fontWeight = 'bold';
-      resolve(fieldElement);
-    } catch (error) {
-      reject(error);
-    }
-  });
+async function showDescription(tour) {
+  try {
+    await myModule.showSwal(`The Forest Hiker`, `Description : ${tour.description}`, tour.imageCover);
+  } catch (error) {
+    throw error;
+  }
 }

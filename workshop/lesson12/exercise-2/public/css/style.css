@@ -87,13 +87,21 @@ button:active {
   transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.leftTopBack {
+  left: 10px;
+  top: 10px;
+}
+
+.leftBottomBack {
+  left: 10px;
+  bottom: 10px;
+}
+
 .back{
   width: 30px;
   height: 15px;
   background-color: #cb5151;
   position: absolute;
-  left: 10px;
-  bottom: 10px;
   background-image: url(../img/arrow-symbol.png);
   background-size: 50%;
   background-repeat: no-repeat;

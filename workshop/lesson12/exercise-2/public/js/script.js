@@ -64,6 +64,19 @@ async function checkSeal(bool, doTrue, doFlase) {
     doFlase();
   }
 }
+
+async function showSwal(title, text, image) {
+  Swal.fire({
+    title: title,
+    text: text,
+    imageUrl: image,
+    imageWidth: 450,
+    imageHeight: 300,
+    imageAlt: 'Custom image',
+    customClass: 'swal-custom-size', 
+  });
+}
+
 export {
   userDatabase,
   tourDatabase,
@@ -73,6 +86,7 @@ export {
   success,
   wait,
   checkSeal,
+  showSwal,
   navigateToAnotherPage,
   useFetchUsers,
 };
